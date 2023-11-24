@@ -18,7 +18,7 @@ namespace CYOAGame.Managers
             gameManager = gm;
             var enemyList = new List<Enemy>()
             {
-                new Enemy("Goblin", 50 * gm.difficulty, 5 * gm.difficulty),
+                new Enemy("Goblin", 50 * gm.difficulty, 5 * gm.difficulty, ),
                 new Enemy("Kobold", 100 * gm.difficulty, 10 * gm.difficulty),
                 new Enemy("Undead Knight", 150 * gm.difficulty, 15 * gm.difficulty),
                 new Enemy("Demon", 200 * gm.difficulty, 20 * gm.difficulty),
@@ -50,7 +50,7 @@ namespace CYOAGame.Managers
                                 monstersDefeated++;
                                 Console.WriteLine($"{enemy.GetName()} has died!");
                                 Thread.Sleep(2000);
-                                player.AddPotion(2, 3);
+                                player.AddPotion(enemy.potionReward, enemy.potionAmount);
                                 Thread.Sleep(2000);
                                 inCombat = false;
                                 break;

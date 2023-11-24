@@ -15,18 +15,24 @@ namespace CYOAGame.Classes
     {
         private List<Potion> potionList = new List<Potion>();
         int level;
-        public Player(string name, float health, float damage) : base(name, health, damage)
+        int xp;
+        public Player(string name, float health, float damage, int level, int xp) : base(name, health, damage)
         {
             this.name = name;
             this.health = health;
             this.damage = damage;
+            this.level = 0;
+            this.xp = xp;
         }
 
         public void LevelUp()
         {
 
         }
+        public void IncreaseXP()
+        {
 
+        }
         
         public override void Attack(Entity target)
         {
@@ -115,8 +121,20 @@ namespace CYOAGame.Classes
             {
                 if (potionList[i].GetPotionType() == potionType)
                 {
-                    this.health += potionList[i].GetHealAmmount();
-                    Console.WriteLine($"You have healed {potionList[i].GetHealAmmount()} health");
+                    health += potionList[i].GetHealAmmount();
+                    float amountHealed;
+                    if(health > maxHealth)
+                    {
+                        
+                        float overHealed =  health + potionList[i].GetHealAmmount() - maxHealth;
+                        amountHealed = potionList[i].GetHealAmmount() - overHealed;
+                        health = maxHealth;
+                    }
+                    else
+                    {
+                        amountHealed = potionList[i].GetHealAmmount();
+                    }
+                    Console.WriteLine($"You have healed {amountHealed} health");
                     potionList[i].RemovePotions(1);
                 }
                 else

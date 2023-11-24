@@ -35,9 +35,9 @@ namespace CYOAGame.Classes
         {
             type = id switch
             {
-                0 => potionType.SMALL,
-                1 => potionType.MEDIUM,
-                2 => potionType.LARGE,
+                1 => potionType.SMALL,
+                2 => potionType.MEDIUM,
+                3 => potionType.LARGE,
                 _ => potionType.SMALL,
             };
         }

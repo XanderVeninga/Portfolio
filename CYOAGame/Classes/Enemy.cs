@@ -10,11 +10,13 @@ namespace CYOAGame.Classes
     internal class Enemy : Entity
     {
 
-        public Enemy(string name, float health, float damage) : base(name, health, damage)
+        public Enemy(string name, float health, float damage, int xpReward, int potionReward, int potionAmount : base(name, health, damage)
         {
             this.name = name;
             this.health = health;
             this.damage = damage;
+            this.potionReward = potionReward;
+            this.potionAmount = potionAmount;
         }
         public override void Attack(Entity target)
         {

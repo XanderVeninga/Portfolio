@@ -16,7 +16,7 @@ namespace CYOAGame.Managers
         {
             Console.WriteLine("Hello player what is your name");
             string playerName = Console.ReadLine();
-            player = new Player(playerName, 0, 0);
+            player = new Player(playerName, 0, 0, 0, 0);
             Console.WriteLine($"ok {player.GetName()}, what difficutly do you want to play on\n[1]: Easy\n[2]: Medium\n[3]: Hard");
             int difficutly;
             if (Int32.TryParse(Console.ReadLine(), out difficutly))
