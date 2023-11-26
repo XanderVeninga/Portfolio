@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Numerics;
@@ -12,17 +13,17 @@ namespace CYOAGame.Managers
     internal class CombatManager
     {
         GameManager gameManager;
-        int monstersDefeated = 0;
+        public int monstersDefeated = 0;
         public void InitCombat(GameManager gm, Player player)
         {
             gameManager = gm;
             var enemyList = new List<Enemy>()
             {
-                new Enemy("Goblin", 50 * gm.difficulty, 5 * gm.difficulty, ),
-                new Enemy("Kobold", 100 * gm.difficulty, 10 * gm.difficulty),
-                new Enemy("Undead Knight", 150 * gm.difficulty, 15 * gm.difficulty),
-                new Enemy("Demon", 200 * gm.difficulty, 20 * gm.difficulty),
-                new Enemy("Dragon", 250 * gm.difficulty, 25 * gm.difficulty)
+                new Enemy("Goblin", 25 , 25 , 5 * gm.difficulty, 50, 1, 3),
+                new Enemy("Kobold", 50 , 50, 20 * gm.difficulty, 100, 1, 5),
+                new Enemy("Undead Knight", 100, 100, 25 * gm.difficulty, 200, 2, 3),
+                new Enemy("Demon", 200, 200, 50 * gm.difficulty, 250, 2, 5),
+                new Enemy("Dragon", 250, 250, 100 * gm.difficulty, 300, 3, 3)
             };
             RunCombat(player, enemyList);
         }
@@ -30,14 +31,13 @@ namespace CYOAGame.Managers
         {
             bool inCombat = true;
             Enemy enemy;
-
-            
             enemy = combatList[monstersDefeated];
             while(inCombat)
             {
                 Console.Clear();
-                Console.WriteLine($"You are fighting a {enemy.GetName()}, it has {enemy.GetHealth()} health remaining");
-                Console.WriteLine($"Health: {player.GetHealth()}    {player.GetName()}\n what do you want to do\n[1]: Attack\n[2]: Heal\n[3]: Surrender");
+                Console.WriteLine($"Enemy Type: {enemy.GetName()}  Enemy Health: {enemy.GetHealth()}/{enemy.GetMaxHealth()}   Damage: {enemy.GetDamage()}");
+                Console.WriteLine($"Your Name: {player.GetName()}   Health: {player.GetHealth()}/{player.GetMaxHealth()}   Level: {player.GetLvl()}   Monsters Defeated: {monstersDefeated}" +
+                                  $"\n what do you want to do\n[1]: Attack\n[2]: Heal\n[3]: Surrender");
                 if (Int32.TryParse(Console.ReadLine(), out int choice))
                 {
                     switch (choice)
@@ -48,26 +48,20 @@ namespace CYOAGame.Managers
                             if (enemy.GetHealth() <= 0)
                             {
                                 monstersDefeated++;
-                                Console.WriteLine($"{enemy.GetName()} has died!");
-                                Thread.Sleep(2000);
-                                player.AddPotion(enemy.potionReward, enemy.potionAmount);
-                                Thread.Sleep(2000);
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"\n{enemy.GetName()} has died!\n");
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                Thread.Sleep(1250);
+                                player.AddPotion(enemy.GetPotionReward(), enemy.GetPotionAmount());
+                                player.IncreaseXP(enemy.GetXpReward());
+                                Thread.Sleep(1000);
+                                gameManager.ChangeGameState(GameState.STORY);
                                 inCombat = false;
                                 break;
                             }
                             Thread.Sleep(2500);
-                            Console.WriteLine($"\nThe {enemy.GetName()} has attacked you dealing {enemy.GetDamage()} damage!");
-                            
                             player.TakeDamage(enemy.GetDamage());
-                            if (player.GetHealth() <= 0)
-                            {
-                                Console.Clear();
-                                Console.WriteLine($"You have died!");
-                                Thread.Sleep(3000);
-                                gameManager.ChangeGameState(GameState.GAMEOVER);
-                                inCombat = false;
-                                break;
-                            }
+                            Console.WriteLine($"\nThe {enemy.GetName()} has attacked you dealing {enemy.GetDamage()} damage!");
                             Thread.Sleep(2500);
                             Console.Clear();
                             break;
@@ -75,24 +69,34 @@ namespace CYOAGame.Managers
                             player.ViewPotionBag();
                             if(Int32.TryParse(Console.ReadLine(), out int potionChoice))
                             {
-                                player.Heal(potionChoice + 1);
+                                player.Heal(potionChoice);
                             }
 
                             break;
                         case 3:
                             //code for surrendering
+                            player.TakeDamage(player.health);
                             break;
                         default:
                             Console.WriteLine("That was not an option");
                             break;
+                    }
+                    if (player.GetHealth() <= 0)
+                    {
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"You surrender and died of cowardice!\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine("\n Press Enter to continue.");
+                        Console.ReadLine();
+                        gameManager.ChangeGameState(GameState.GAMEOVER);
+                        inCombat = false;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Please enter a number!");
                 }
-                
-                
             }
         }
     }

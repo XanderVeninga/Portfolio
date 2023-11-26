@@ -12,7 +12,7 @@ namespace CYOAGame.SuperClasses
         public float health;
         public float maxHealth;
         public float damage;
-        public Entity(string name, float health, float maxHealth float damage)
+        public Entity(string name, float health, float maxHealth, float damage)
         {
             this.name = name;
             this.health = health;
@@ -33,9 +33,9 @@ namespace CYOAGame.SuperClasses
         {
             return maxHealth;
         }
-        public float ChangeMaxHealth(float amount)
+        public void ChangeMaxHealth(float amount)
         {
-            maxHealth += amount;
+            maxHealth = amount;
         }
         public float GetHealth()
         {
@@ -58,14 +58,25 @@ namespace CYOAGame.SuperClasses
             damage = newDamage;
         }
 
-        public void TakeDamage(float _damage)
+        public virtual void TakeDamage(float _damage)
         {
             health = health - _damage;
+            if(health < 0)
+            {
+                GameOver();
+            }
         }
 
         public virtual void Attack(Entity target)
         {
             target.TakeDamage(GetDamage());
+        }
+
+        public virtual void GameOver()
+        {
+            health = 0;
+
+            //extend if needed;
         }
     }
 }

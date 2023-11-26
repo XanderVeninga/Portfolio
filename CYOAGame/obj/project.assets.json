@@ -1270,11 +1270,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\xande\\source\\repos\\CYOAGame\\CYOAGame.csproj",
+      "projectUniqueName": "C:\\Users\\xande\\Documents\\GitHub\\Portfolio\\CYOAGame\\CYOAGame.csproj",
       "projectName": "CYOAGame",
-      "projectPath": "C:\\Users\\xande\\source\\repos\\CYOAGame\\CYOAGame.csproj",
+      "projectPath": "C:\\Users\\xande\\Documents\\GitHub\\Portfolio\\CYOAGame\\CYOAGame.csproj",
       "packagesPath": "C:\\Users\\xande\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\xande\\source\\repos\\CYOAGame\\obj\\",
+      "outputPath": "C:\\Users\\xande\\Documents\\GitHub\\Portfolio\\CYOAGame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1289,7 +1289,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1329,7 +1328,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ip9ooP1khpiNB5mq42C/6DcQrC+vkEv1TkTp91DsYu/EIX4VH1ElnxLpFyeD7v/eh0WXAoDCOjhx6hax29VUXg==",
+  "dgSpecHash": "DlQ9yoMxwyipxwiesNzxI3JN7W76+G4sx9U+O6EEC4MUpRzh9c1ESvZnok26qpbH1XY5g08332cLdndtn8L4YQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\xande\\source\\repos\\CYOAGame\\CYOAGame.csproj",
+  "projectFilePath": "C:\\Users\\xande\\Documents\\GitHub\\Portfolio\\CYOAGame\\CYOAGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\xande\\.nuget\\packages\\aspose.words\\23.10.0\\aspose.words.23.10.0.nupkg.sha512",
     "C:\\Users\\xande\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

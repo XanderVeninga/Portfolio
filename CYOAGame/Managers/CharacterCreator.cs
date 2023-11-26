@@ -14,18 +14,21 @@ namespace CYOAGame.Managers
         Player player;
         public Player NewCharacter(GameManager gm)
         {
-            Console.WriteLine("Hello player what is your name");
+            Console.WriteLine("Hello player what is your name?\n");
             string playerName = Console.ReadLine();
-            player = new Player(playerName, 0, 0, 0, 0);
-            Console.WriteLine($"ok {player.GetName()}, what difficutly do you want to play on\n[1]: Easy\n[2]: Medium\n[3]: Hard");
+            Console.Clear();
+            player = new Player(playerName, 0, 0, 0, 1, 0);
+            Console.WriteLine($"Ok {player.GetName()}, what difficutly do you want to play on?\n\n[1]: Easy\n[2]: Medium\n[3]: Hard\n");
             int difficutly;
             if (Int32.TryParse(Console.ReadLine(), out difficutly))
             {
-                player.SetDamage(MathF.Round(10 / difficutly));
-                player.SetHealth(MathF.Round(100 / difficutly));
+                player.SetDamage(MathF.Round(40 / difficutly));
+                player.ChangeMaxHealth(MathF.Round(250 / difficutly));
+                player.SetHealth(MathF.Round(250 / difficutly));
             }
             gm.difficulty = difficutly;
             gm.ChangeGameState(GameState.STORY);
+            Console.Clear();
             return player;
         }
     }
